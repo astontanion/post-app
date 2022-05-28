@@ -16,14 +16,16 @@
         <activity
             android:name=".PostListActivity"
             android:label="All posts"
+            android:exported="true"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PostDetailActivity" />
+        <activity
+            android:name=".PostDetailActivity"
+            android:exported="true"
+        />
     </application>
-
 </manifest>
