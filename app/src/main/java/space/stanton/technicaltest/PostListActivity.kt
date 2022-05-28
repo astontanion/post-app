@@ -5,31 +5,45 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
 import org.json.JSONObject
+import space.stanton.technicaltest.databinding.ActivityMainBinding
+import space.stanton.technicaltest.model.Post
 
-class PostAdapter(val items: MutableList<JSONObject>, val onItemClick: (String) -> Unit) :
+class PostAdapter(private val items: List<Post>, val onItemClick: (Int) -> Unit) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
-    class PostViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview)
+    class PostViewHolder(
+        itemview: View,
+        private val binding: ViewDataBinding?
+    ) : RecyclerView.ViewHolder(itemview) {
+        fun bind(post: Post, onItemClick: (Int) -> Unit) {
+            itemView.setOnClickListener {
+                onItemClick(post.id)
+            }
+
+            binding?.apply {
+                setVariable(BR.post, post)
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        return PostViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_post, parent, false)
-        )
+        val rootView  = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_post, parent, false)
+        val binding: ViewDataBinding? = DataBindingUtil.bind(rootView)
+        return PostViewHolder(itemview = rootView, binding = binding)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.itemView.findViewById<TextView>(R.id.title).text = items[position].getString("title")
-        holder.itemView.findViewById<TextView>(R.id.content).text =
-            items[position].getString("body")
-        holder.itemView.setOnClickListener {
-            onItemClick(items[position].getString("id"))
-        }
+        holder.bind(items[position], onItemClick)
     }
 
     override fun getItemCount(): Int = items.size
@@ -41,22 +55,20 @@ class PostAdapter(val items: MutableList<JSONObject>, val onItemClick: (String) 
  */
 class PostListActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this@PostListActivity, R.layout.activity_main)
 
         Thread {
             ApiCalls.loadAll {
                 if (it.second != null) {
                     //TODO - handle error
                 } else {
-                    var json = JSONArray(it.first!!.string())
                     runOnUiThread {
-                        var listOfPosts = mutableListOf<JSONObject>()
-                        for (i in 0 until json.length()) {
-                            listOfPosts.add(i, json.getJSONObject(i))
-                        }
+                        val itemType = object: TypeToken<List<Post>>(){}.type
+                        val listOfPosts = Gson().fromJson<List<Post>>(it.first!!.string(), itemType)
                         findViewById<RecyclerView>(R.id.postsList).adapter =
                             PostAdapter(listOfPosts, onItemClick = { id ->
                                 startActivity(

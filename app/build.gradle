@@ -1,11 +1,18 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
     compileSdkVersion 32
     buildToolsVersion "30.0.3"
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding true
+
+    }
 
     defaultConfig {
         applicationId "space.stanton.technicaltest"
@@ -24,10 +31,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -46,7 +55,6 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     implementation 'com.google.code.gson:gson:2.9.0'
-
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
