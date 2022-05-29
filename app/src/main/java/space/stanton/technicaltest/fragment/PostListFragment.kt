@@ -9,12 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import dagger.hilt.android.AndroidEntryPoint
 import space.stanton.technicaltest.ApiCalls
 import space.stanton.technicaltest.adapter.PostAdapter
 import space.stanton.technicaltest.R
 import space.stanton.technicaltest.databinding.PostListFragmentBinding
 import space.stanton.technicaltest.model.Post
 
+@AndroidEntryPoint
 class PostListFragment: Fragment() {
 
     private lateinit var binding: PostListFragmentBinding
