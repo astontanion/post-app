@@ -4,22 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import space.stanton.technicaltest.ApiCalls
+import kotlinx.coroutines.flow.collectLatest
 import space.stanton.technicaltest.adapter.PostAdapter
 import space.stanton.technicaltest.R
 import space.stanton.technicaltest.databinding.PostListFragmentBinding
-import space.stanton.technicaltest.model.Post
+import space.stanton.technicaltest.network.DataMessage
+import space.stanton.technicaltest.network.DataResource
+import space.stanton.technicaltest.network.NetworkFailureReason
+import space.stanton.technicaltest.viewmodel.PostListViewModel
 
 @AndroidEntryPoint
 class PostListFragment: Fragment() {
 
     private lateinit var binding: PostListFragmentBinding
+
+    private val postListViewmodel: PostListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +40,7 @@ class PostListFragment: Fragment() {
         binding = PostListFragmentBinding.inflate(inflater, container, false)
         binding.apply {
             lifecycleOwner = this@PostListFragment
+            viewModel = postListViewmodel
         }
         return binding.root
     }
@@ -44,25 +52,39 @@ class PostListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Thread {
-            ApiCalls.loadAll {
-                if (it.second != null) {
-                    //TODO - handle error
-                } else {
-                    requireActivity().runOnUiThread {
-                        val itemType = object: TypeToken<List<Post>>(){}.type
-                        val listOfPosts = Gson().fromJson<List<Post>>(it.first!!.string(), itemType)
-                        binding.postsList.apply {
-                            adapter = PostAdapter(listOfPosts, onItemClick = { id ->
-                                this@PostListFragment.findNavController().navigate(
-                                    R.id.action_postListFragment_to_postDetailFragment,
-                                    PostDetailFragment.buildBundle(id)
-                                )
-                            })
+
+        lifecycleScope.launchWhenCreated {
+            postListViewmodel.state.collectLatest { state ->
+                when (val result = state.postResource) {
+                    is DataResource.Idle -> {}
+                    is DataResource.Waiting -> {}
+                    is DataResource.Successful -> {
+                        result.data?.let { posts ->
+                            binding.postsList.apply {
+                                adapter = PostAdapter(posts, onItemClick = { id ->
+                                    this@PostListFragment.findNavController().navigate(
+                                        R.id.action_postListFragment_to_postDetailFragment,
+                                        PostDetailFragment.buildBundle(id)
+                                    )
+                                })
+                            }
+                        }
+                    }
+                    is DataResource.Failure -> {
+                        val messageId = when ((result.message as DataMessage.Failure).reason) {
+                            NetworkFailureReason.UNKNOWN -> R.string.error_retrieve_all_posts
+                            NetworkFailureReason.CONNECTION -> R.string.error_network_connetion
+                        }
+
+                        Snackbar.make(requireContext(), view, getString(messageId), Snackbar.LENGTH_LONG).apply {
+                            setAction(R.string.action_retry) {
+                                postListViewmodel.retrieveAllPosts()
+                            }
+                            show()
                         }
                     }
                 }
             }
-        }.start()
+        }
     }
 }

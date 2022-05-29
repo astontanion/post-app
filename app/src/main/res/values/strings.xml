@@ -2,4 +2,7 @@
     <string name="app_name">Technical test</string>
     <string name="post_item_content_description">Title %s</string>
     <string name="activity_label">All posts</string>
+    <string name="error_retrieve_all_posts">Failed to retrieve posts</string>
+    <string name="error_network_connetion">Something went wrong. Check internet connection.</string>
+    <string name="action_retry">Retry</string>
 </resources>
