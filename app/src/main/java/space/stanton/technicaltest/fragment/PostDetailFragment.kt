@@ -7,12 +7,25 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import org.json.JSONObject
 import space.stanton.technicaltest.ApiCalls
+import space.stanton.technicaltest.R
+import space.stanton.technicaltest.adapter.PostAdapter
 import space.stanton.technicaltest.databinding.PostDetailFragmentBinding
 import space.stanton.technicaltest.model.Post
+import space.stanton.technicaltest.network.DataMessage
+import space.stanton.technicaltest.network.DataResource
+import space.stanton.technicaltest.network.NetworkFailureReason
+import space.stanton.technicaltest.viewmodel.PostDetailViewModel
 
+@AndroidEntryPoint
 class PostDetailFragment: Fragment() {
 
     companion object {
@@ -21,8 +34,9 @@ class PostDetailFragment: Fragment() {
         }
     }
 
-    private lateinit var binding: PostDetailFragmentBinding
     private var postId: Int = 0
+    private val postDetailViewModel: PostDetailViewModel by viewModels()
+    private lateinit var binding: PostDetailFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +54,7 @@ class PostDetailFragment: Fragment() {
         binding = PostDetailFragmentBinding.inflate(inflater, container, false)
         binding.apply {
             lifecycleOwner = this@PostDetailFragment
+            viewModel = postDetailViewModel
         }
         return binding.root
     }
@@ -47,19 +62,27 @@ class PostDetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Thread {
-            ApiCalls.getPostById(postId) {
-                if (it.second != null) {
-                    // TODO - handle error
-                } else {
-                    val post = Gson().fromJson(it.first!!.string(), Post::class.java)
-                    requireActivity().runOnUiThread {
-                        binding.post = post
-                        (requireActivity() as AppCompatActivity).title = post.title
+        lifecycleScope.launchWhenCreated {
+            postDetailViewModel.state.collectLatest { state ->
+                when (val result = state.postResource) {
+                    is DataResource.Idle -> {}
+                    is DataResource.Waiting -> {}
+                    is DataResource.Successful -> {}
+                    is DataResource.Failure -> {
+                        val messageId = when ((result.message as DataMessage.Failure).reason) {
+                            NetworkFailureReason.UNKNOWN -> R.string.error_retrieve_post_detail
+                            NetworkFailureReason.CONNECTION -> R.string.error_network_connetion
+                        }
+
+                        Snackbar.make(requireContext(), view, getString(messageId), Snackbar.LENGTH_LONG).apply {
+                            setAction(R.string.action_retry) {
+                                postDetailViewModel.retrievePostWithId(postId)
+                            }
+                            show()
+                        }
                     }
                 }
             }
-
-        }.start()
+        }
     }
 }

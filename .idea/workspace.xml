@@ -23,19 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="496bde9a-f2e5-41c6-ad3d-244129737e6a" name="Default Changelist" comment="Add nasty api calls and create all posts screen">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlinx_kotlinx_coroutines_core_jvm_1_4_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.androidTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.androidTest.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.unitTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.unitTest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/core/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/core/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostListFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/model/Post.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/model/Post.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/network/DataMessage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/network/DataMessage.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/post_list_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/post_list_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostDetailFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/viewmodel/PostListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/viewmodel/PostListViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/post_detail_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/post_detail_fragment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,8 +72,8 @@
         <option value="Kotlin Interface" />
         <option value="JUnit5 Test Class" />
         <option value="JUnit4 Test Class" />
-        <option value="Kotlin Class" />
         <option value="Kotlin Data Class" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -151,6 +142,9 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="CreateKotlinClassDialog.RecentsKey">
+      <recent name="space.stanton.technicaltest.viewmodel" />
+    </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="space.stanton.technicaltest.adapter" />
     </key>
@@ -159,6 +153,7 @@
       <recent name="space.stanton.technicaltest.repository" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="space.stanton.technicaltest.usecase" />
       <recent name="space.stanton.technicaltest.model" />
       <recent name="space.stanton.technicaltest.network" />
     </key>
