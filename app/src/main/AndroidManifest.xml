@@ -14,8 +14,8 @@
         android:theme="@style/Theme.TechnicalTest"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".PostListActivity"
-            android:label="All posts"
+            android:name=".core.MainActivity"
+            android:label="@string/activity_label"
             android:exported="true"
             >
             <intent-filter>
@@ -23,9 +23,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".PostDetailActivity"
-            android:exported="true"
-        />
     </application>
 </manifest>

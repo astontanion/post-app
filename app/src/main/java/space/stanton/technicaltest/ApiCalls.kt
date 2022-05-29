@@ -8,9 +8,9 @@ import okhttp3.ResponseBody
 object ApiCalls {
 
     fun loadAll(callBack: (Pair<ResponseBody?, Throwable?>) -> Unit) {
-        var url = "https://jsonplaceholder.typicode.com/posts"
-        var client = OkHttpClient()
-        var request = Request.Builder().url(url).build()
+        val url = "https://jsonplaceholder.typicode.com/posts"
+        val client = OkHttpClient()
+        val request = Request.Builder().url(url).build()
 
         try {
             val response = client.newCall(request).execute()
@@ -20,8 +20,8 @@ object ApiCalls {
         }
     }
 
-    fun getPostById(id: String, callBack: (Pair<ResponseBody?, Throwable?>) -> Unit) {
-        var url = "https://jsonplaceholder.typicode.com/posts/$id"
+    fun getPostById(id: Int, callBack: (Pair<ResponseBody?, Throwable?>) -> Unit) {
+        val url = "https://jsonplaceholder.typicode.com/posts/$id"
         val client = OkHttpClient()
         val request = Request.Builder().url(url).build()
 

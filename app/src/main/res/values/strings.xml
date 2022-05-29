@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Technical test</string>
     <string name="post_item_content_description">Title %s</string>
+    <string name="activity_label">All posts</string>
 </resources>
