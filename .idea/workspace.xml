@@ -23,16 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="496bde9a-f2e5-41c6-ad3d-244129737e6a" name="Default Changelist" comment="Add nasty api calls and create all posts screen">
+      <change afterPath="$PROJECT_DIR$/app/src/test/java/space/stanton/technicaltest/viewmodel/CommentListAdapterTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.androidTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.androidTest.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.unitTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.unitTest.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/di/RepositoryModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/di/RepositoryModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/adapter/PostAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/adapter/PostAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostDetailFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostListFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/model/Comment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/model/Comment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/viewmodel/PostDetailViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/viewmodel/PostDetailViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/post_detail_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/post_detail_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigation.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +37,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[192.168.1.66:5555]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -81,6 +79,7 @@
         <option value="Kotlin Data Class" />
         <option value="resourceFile" />
         <option value="Kotlin Interface" />
+        <option value="layoutResourceFile" />
         <option value="Kotlin Class" />
         <option value="JUnit4 Test Class" />
       </list>
@@ -126,7 +125,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/test/java/space/stanton/technicaltest/usecase" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/test/java/space/stanton/technicaltest/viewmodel" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/androidTest/java/space/stanton/technicaltest" />
     <property name="memory.settings.postsync.last.time.stamp" value="1653926738304" />
     <property name="project.structure.last.edited" value="Dependencies" />
@@ -159,19 +158,20 @@
       <recent name="space.stanton.technicaltest.adapter" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="space.stanton.technicaltest.usecase" />
       <recent name="space.stanton.technicaltest.viewmodel" />
+      <recent name="space.stanton.technicaltest.adapter" />
+      <recent name="space.stanton.technicaltest.usecase" />
       <recent name="space.stanton.technicaltest.repository" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="space.stanton.technicaltest.viewmodel" />
       <recent name="space.stanton.technicaltest.usecase" />
       <recent name="space.stanton.technicaltest.repository" />
       <recent name="space.stanton.technicaltest.model" />
-      <recent name="space.stanton.technicaltest.viewmodel" />
       <recent name="space.stanton.technicaltest.network" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.RetrieveAllCommentForPostUseCaseTest">
+  <component name="RunManager" selected="Gradle.CommentListAdapterTest">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -250,6 +250,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CommentListAdapterTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;space.stanton.technicaltest.viewmodel.CommentListAdapterTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":app:testDebugUnitTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="PostDetailViewModelTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -277,27 +298,6 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="--tests &quot;space.stanton.technicaltest.viewmodel.PostListViewModelTest&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":app:testDebugUnitTest" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="PostListViewModelTest.testThatTheFirstStateEmissionIsIdle" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;space.stanton.technicaltest.viewmodel.PostListViewModelTest.testThatTheFirstStateEmissionIsIdle&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -373,11 +373,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.CommentListAdapterTest" />
         <item itemvalue="Gradle.RetrieveAllCommentForPostUseCaseTest" />
         <item itemvalue="Gradle.PostListViewModelTest" />
         <item itemvalue="Gradle.PostDetailViewModelTest" />
         <item itemvalue="Gradle.PostListViewModelTest.testThatTheSecondStateEmissionIsWaiting" />
-        <item itemvalue="Gradle.PostListViewModelTest.testThatTheFirstStateEmissionIsIdle" />
       </list>
     </recent_temporary>
   </component>

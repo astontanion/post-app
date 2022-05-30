@@ -8,4 +8,7 @@
     <string name="error_retrieve_post_detail">Failed to retrieve post detail</string>
     <string name="button_see_comment">See comments</string>
     <string name="content_description_see_comment">See comment</string>
+    <string name="error_retrieve_all_comment">Failed to retrieve comments</string>
+    <string name="comment_owner"> By: %s</string>
+    <string name="comment_owner_content_description">Comment by %s</string>
 </resources>

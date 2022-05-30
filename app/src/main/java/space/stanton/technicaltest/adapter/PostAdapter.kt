@@ -24,6 +24,7 @@ class PostAdapter(private val items: List<Post>, val onItemClick: (Int) -> Unit)
 
             binding?.apply {
                 setVariable(BR.post, post)
+                executePendingBindings()
             }
         }
     }
