@@ -2,26 +2,39 @@ package space.stanton.technicaltest.repository
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import okhttp3.ResponseBody.Companion.toResponseBody
+import retrofit2.HttpException
+import retrofit2.Response
 import space.stanton.technicaltest.model.Post
 import space.stanton.technicaltest.model.PostDto
-import java.io.StringReader
-import java.nio.file.Files
+import java.io.IOException
 import java.nio.file.Files.newBufferedReader
 import java.nio.file.Paths
 
 class FakePostRepositoryImpl: PostRepository {
 
-    override suspend fun retrieveAllPosts(): List<Post> {
-        val reader = Files.newBufferedReader(Paths.get("res/raw/posts.json"))
+    private var posts: List<Post> = listOf()
+
+    init {
+        val reader = newBufferedReader(Paths.get("src/main/res/raw/posts.json"))
         val type = object: TypeToken<List<PostDto>>() {}.type
         val postsDto = Gson().fromJson<List<PostDto>>(reader, type)
-        return postsDto.map { it.toPost() }
+        posts = postsDto.map { it.toPost() }
+    }
+
+    override suspend fun retrieveAllPosts(): List<Post> {
+        return posts
     }
 
     override suspend fun retrievePostWithId(postId: Int): Post {
-        val reader = Files.newBufferedReader(Paths.get("res/raw/posts.json"))
-        val type = object: TypeToken<List<PostDto>>() {}.type
-        val postsDto = Gson().fromJson<List<PostDto>>(reader, type)
-        return postsDto.map { it.toPost() }.first { it.id == postId }
+        val post = posts.firstOrNull { it.id == postId }
+
+        if (post != null) { return post }
+
+        if (postId == -1) {
+            throw IOException()
+        }
+
+        throw HttpException(Response.error<Post?>(500, "".toResponseBody()))
     }
 }

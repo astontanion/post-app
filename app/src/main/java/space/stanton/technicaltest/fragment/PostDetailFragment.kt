@@ -29,8 +29,9 @@ import space.stanton.technicaltest.viewmodel.PostDetailViewModel
 class PostDetailFragment: Fragment() {
 
     companion object {
+        const val ARG_POST_ID = "post_id"
         fun buildBundle(postId: Int): Bundle {
-            return bundleOf("post_id" to postId)
+            return bundleOf(ARG_POST_ID to postId)
         }
     }
 

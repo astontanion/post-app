@@ -27,7 +27,6 @@ class RetrievePostWithIdUseCase @Inject constructor(
                     )
                 )
             } catch (e: HttpException) {
-                e.printStackTrace()
                 emit(
                     DataResource.Failure(
                         operation = Operation.GET,
@@ -35,7 +34,6 @@ class RetrievePostWithIdUseCase @Inject constructor(
                     )
                 )
             } catch (e: IOException) {
-                e.printStackTrace()
                 emit(
                     DataResource.Failure(
                         operation = Operation.GET,

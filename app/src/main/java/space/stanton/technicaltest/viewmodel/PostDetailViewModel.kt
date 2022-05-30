@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import space.stanton.technicaltest.fragment.PostDetailFragment
 import space.stanton.technicaltest.usecase.RetrievePostWithIdUseCase
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class PostDetailViewModel @Inject constructor(
     val state: StateFlow<PostDetailState> = _state
 
     init {
-        val postId = stateHandle.get<Int>("post_id") ?: -1
+        val postId = stateHandle.get<Int>(PostDetailFragment.ARG_POST_ID) ?: -1
         retrievePostWithId(postId = postId)
     }
 
