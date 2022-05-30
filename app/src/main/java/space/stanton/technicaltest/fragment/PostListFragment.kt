@@ -47,7 +47,7 @@ class PostListFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (requireActivity() as AppCompatActivity).title = getString(R.string.activity_label)
+        // (requireActivity() as AppCompatActivity).title = getString(R.string.activity_label)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

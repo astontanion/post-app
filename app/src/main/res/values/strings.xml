@@ -6,4 +6,6 @@
     <string name="error_network_connetion">Something went wrong. Check internet connection.</string>
     <string name="action_retry">Retry</string>
     <string name="error_retrieve_post_detail">Failed to retrieve post detail</string>
+    <string name="button_see_comment">See comments</string>
+    <string name="content_description_see_comment">See comment</string>
 </resources>

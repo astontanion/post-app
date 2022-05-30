@@ -1,5 +1,6 @@
 package space.stanton.technicaltest.viewmodel
 
+import android.view.View
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,6 +18,8 @@ class PostDetailViewModel @Inject constructor(
     private val retrievePostWithIdUseCase: RetrievePostWithIdUseCase,
     stateHandle: SavedStateHandle
 ): ViewModel() {
+
+    lateinit var seeCommentClick: () -> Unit
 
     private val _state = MutableStateFlow(PostDetailState())
     val state: StateFlow<PostDetailState> = _state
