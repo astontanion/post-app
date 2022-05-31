@@ -12,7 +12,7 @@ import org.junit.Test
 import space.stanton.technicaltest.model.Comment
 import space.stanton.technicaltest.network.DataMessage
 import space.stanton.technicaltest.network.DataResource
-import space.stanton.technicaltest.network.NetworkFailureReason
+import space.stanton.technicaltest.network.GenericFailureReason
 import space.stanton.technicaltest.repository.FakeCommentRepositoryImpl
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -67,7 +67,7 @@ class RetrieveAllCommentForPostUseCaseTest {
 
         val reason = (message as DataMessage.Failure).reason
 
-        assertEquals(NetworkFailureReason.UNKNOWN, reason)
+        assertEquals(GenericFailureReason.UNKNOWN, reason)
     }
 
     @Test
@@ -80,6 +80,6 @@ class RetrieveAllCommentForPostUseCaseTest {
 
         val reason = (message as DataMessage.Failure).reason
 
-        assertEquals(NetworkFailureReason.CONNECTION, reason)
+        assertEquals(GenericFailureReason.CONNECTION, reason)
     }
 }

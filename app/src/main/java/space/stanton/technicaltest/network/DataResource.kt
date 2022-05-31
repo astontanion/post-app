@@ -19,7 +19,7 @@ sealed class DataResource<T>(
 
     class Failure<T>(
         operation: Operation,
-        reason: Reason = NetworkFailureReason.UNKNOWN,
+        reason: Reason = GenericFailureReason.UNKNOWN,
         extra: Bundle = bundleOf(),
     ) : DataResource<T>(
         data = null,

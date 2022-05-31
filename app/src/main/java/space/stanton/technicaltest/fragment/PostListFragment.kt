@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -18,7 +16,7 @@ import space.stanton.technicaltest.R
 import space.stanton.technicaltest.databinding.PostListFragmentBinding
 import space.stanton.technicaltest.network.DataMessage
 import space.stanton.technicaltest.network.DataResource
-import space.stanton.technicaltest.network.NetworkFailureReason
+import space.stanton.technicaltest.network.GenericFailureReason
 import space.stanton.technicaltest.viewmodel.PostListViewModel
 
 @AndroidEntryPoint
@@ -72,8 +70,8 @@ class PostListFragment: Fragment() {
                     }
                     is DataResource.Failure -> {
                         val messageId = when ((result.message as DataMessage.Failure).reason) {
-                            NetworkFailureReason.UNKNOWN -> R.string.error_retrieve_all_posts
-                            NetworkFailureReason.CONNECTION -> R.string.error_network_connetion
+                            GenericFailureReason.UNKNOWN -> R.string.error_retrieve_all_posts
+                            GenericFailureReason.CONNECTION -> R.string.error_network_connetion
                         }
 
                         Snackbar.make(requireContext(), view, getString(messageId), Snackbar.LENGTH_LONG).apply {

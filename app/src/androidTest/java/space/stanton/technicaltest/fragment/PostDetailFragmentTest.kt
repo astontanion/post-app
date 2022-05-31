@@ -11,31 +11,37 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import space.stanton.technicaltest.R
 import space.stanton.technicaltest.di.RepositoryModule
 import space.stanton.technicaltest.launchFragmentInHiltContainer
+import space.stanton.technicaltest.repository.PostRepository
+import javax.inject.Inject
 
 @MediumTest
 @HiltAndroidTest
 @UninstallModules(RepositoryModule::class)
+@OptIn(ExperimentalCoroutinesApi::class)
 class PostDetailFragmentTest {
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
+
+    @Inject
+    lateinit var postRepository: PostRepository
 
     @Before
     fun setup() {
         hiltRule.inject()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun testClickingOnSeeCommentsNavigateToCommentListFragment() = runBlocking {
+    fun testClickingOnSeeCommentsNavigateToCommentListFragment() = runTest {
         val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
         val postDetailFragmentArgs = PostDetailFragmentArgs(postId = 86).toBundle()
 
@@ -48,5 +54,23 @@ class PostDetailFragmentTest {
         onView(withId(R.id.button_see_coments)).perform(click())
 
         assertEquals(R.id.commentListFragment ,navController.currentDestination?.id)
+    }
+
+    @Test
+    fun testThatClickingOnSaveButtonSavesPostInDataBase() = runTest {
+        val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
+        val postDetailFragmentArgs = PostDetailFragmentArgs(postId = 86).toBundle()
+
+        launchFragmentInHiltContainer<PostDetailFragment>(postDetailFragmentArgs) {
+            navController.setGraph(R.navigation.main_navigation)
+            navController.setCurrentDestination(R.id.postDetailFragment, postDetailFragmentArgs)
+            Navigation.setViewNavController(requireView(), navController)
+        }
+
+        onView(withId(R.id.button_save_post)).perform(click())
+
+        val post = postRepository.retrieveSavedPostWithId(postId = 86)
+
+        assertNotNull(post)
     }
 }

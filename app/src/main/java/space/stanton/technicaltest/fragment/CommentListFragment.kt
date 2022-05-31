@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -18,7 +16,7 @@ import space.stanton.technicaltest.adapter.CommentListAdapter
 import space.stanton.technicaltest.databinding.CommentListFragmentBinding
 import space.stanton.technicaltest.network.DataMessage
 import space.stanton.technicaltest.network.DataResource
-import space.stanton.technicaltest.network.NetworkFailureReason
+import space.stanton.technicaltest.network.GenericFailureReason
 import space.stanton.technicaltest.viewmodel.CommentListViewModel
 
 @AndroidEntryPoint
@@ -76,8 +74,8 @@ class CommentListFragment: Fragment() {
                     }
                     is DataResource.Failure -> {
                         val messageId = when ((result.message as DataMessage.Failure).reason) {
-                            NetworkFailureReason.UNKNOWN -> R.string.error_retrieve_all_comment
-                            NetworkFailureReason.CONNECTION -> R.string.error_network_connetion
+                            GenericFailureReason.UNKNOWN -> R.string.error_retrieve_all_comment
+                            GenericFailureReason.CONNECTION -> R.string.error_network_connetion
                         }
 
                         Snackbar.make(requireContext(), view, getString(messageId), Snackbar.LENGTH_LONG).apply {

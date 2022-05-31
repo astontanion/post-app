@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import space.stanton.technicaltest.model.Comment
 import space.stanton.technicaltest.network.DataResource
-import space.stanton.technicaltest.network.NetworkFailureReason
+import space.stanton.technicaltest.network.GenericFailureReason
 import space.stanton.technicaltest.network.Operation
 import space.stanton.technicaltest.repository.CommentRepository
 import java.io.IOException
@@ -30,14 +30,14 @@ class RetrieveAllCommentForPostUseCase @Inject constructor(
                 emit(
                     DataResource.Failure(
                         operation = Operation.GET,
-                        reason = NetworkFailureReason.UNKNOWN
+                        reason = GenericFailureReason.UNKNOWN
                     )
                 )
             } catch (e: IOException) {
                 emit(
                     DataResource.Failure(
                         operation = Operation.GET,
-                        reason = NetworkFailureReason.CONNECTION
+                        reason = GenericFailureReason.CONNECTION
                     )
                 )
             }

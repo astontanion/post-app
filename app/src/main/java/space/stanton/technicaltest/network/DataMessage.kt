@@ -12,9 +12,9 @@ sealed class Operation {
     object DEL : Operation()
 }
 
-sealed class NetworkFailureReason : Reason() {
-    object UNKNOWN : NetworkFailureReason()
-    object CONNECTION: NetworkFailureReason()
+sealed class GenericFailureReason : Reason() {
+    object UNKNOWN : GenericFailureReason()
+    object CONNECTION: GenericFailureReason()
 }
 
 sealed class DataMessage {
@@ -28,7 +28,7 @@ sealed class DataMessage {
 
     data class Failure(
         val operation: Operation,
-        val reason: Reason = NetworkFailureReason.UNKNOWN,
+        val reason: Reason = GenericFailureReason.UNKNOWN,
         val extra: Bundle = bundleOf()
     ) : DataMessage()
 }

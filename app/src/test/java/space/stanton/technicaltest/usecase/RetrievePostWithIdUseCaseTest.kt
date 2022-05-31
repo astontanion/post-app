@@ -12,7 +12,7 @@ import org.junit.Test
 import space.stanton.technicaltest.model.Post
 import space.stanton.technicaltest.network.DataMessage
 import space.stanton.technicaltest.network.DataResource
-import space.stanton.technicaltest.network.NetworkFailureReason
+import space.stanton.technicaltest.network.GenericFailureReason
 import space.stanton.technicaltest.repository.FakePostRepositoryImpl
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -59,7 +59,7 @@ class RetrievePostWithIdUseCaseTest {
 
         val reason = (message as DataMessage.Failure).reason
 
-        assertEquals(NetworkFailureReason.UNKNOWN, reason)
+        assertEquals(GenericFailureReason.UNKNOWN, reason)
     }
 
     @Test
@@ -72,7 +72,7 @@ class RetrievePostWithIdUseCaseTest {
 
         val reason = (message as DataMessage.Failure).reason
 
-        assertEquals(NetworkFailureReason.CONNECTION, reason)
+        assertEquals(GenericFailureReason.CONNECTION, reason)
     }
 
     @Test

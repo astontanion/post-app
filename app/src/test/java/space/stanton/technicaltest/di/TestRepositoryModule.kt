@@ -9,21 +9,18 @@ import dagger.hilt.components.SingletonComponent
 import space.stanton.technicaltest.repository.FakeCommentRepositoryImpl
 import space.stanton.technicaltest.repository.FakePostRepositoryImpl
 import space.stanton.technicaltest.repository.*
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class TestRepositoryModule {
 
-    @Singleton
     @Provides
-    fun providePostRepository(@ApplicationContext context: Context): PostRepository {
-        return FakePostRepositoryImpl(context = context)
+    fun providePostRepository(): PostRepository {
+        return FakePostRepositoryImpl()
     }
 
-    @Singleton
     @Provides
-    fun provideCommentRepository(@ApplicationContext context: Context): CommentRepository {
-        return FakeCommentRepositoryImpl(context = context)
+    fun provideCommentRepository(): CommentRepository {
+        return FakeCommentRepositoryImpl()
     }
 }

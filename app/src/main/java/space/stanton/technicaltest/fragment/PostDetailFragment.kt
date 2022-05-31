@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,7 +17,8 @@ import space.stanton.technicaltest.R
 import space.stanton.technicaltest.databinding.PostDetailFragmentBinding
 import space.stanton.technicaltest.network.DataMessage
 import space.stanton.technicaltest.network.DataResource
-import space.stanton.technicaltest.network.NetworkFailureReason
+import space.stanton.technicaltest.network.GenericFailureReason
+import space.stanton.technicaltest.network.Operation
 import space.stanton.technicaltest.viewmodel.PostDetailViewModel
 
 @AndroidEntryPoint
@@ -65,8 +67,8 @@ class PostDetailFragment: Fragment() {
                     is DataResource.Successful -> {}
                     is DataResource.Failure -> {
                         val messageId = when ((result.message as DataMessage.Failure).reason) {
-                            NetworkFailureReason.UNKNOWN -> R.string.error_retrieve_post_detail
-                            NetworkFailureReason.CONNECTION -> R.string.error_network_connetion
+                            GenericFailureReason.UNKNOWN -> R.string.error_retrieve_post_detail
+                            GenericFailureReason.CONNECTION -> R.string.error_network_connetion
                         }
 
                         Snackbar.make(requireContext(), view, getString(messageId), Snackbar.LENGTH_LONG).apply {
@@ -74,6 +76,51 @@ class PostDetailFragment: Fragment() {
                                 postDetailViewModel.retrievePostWithId(postId)
                             }
                             show()
+                        }
+                    }
+                }
+
+                when (val result = state.savedPostResource) {
+                    is DataResource.Idle -> {}
+                    is DataResource.Waiting -> {}
+                    is DataResource.Successful -> {
+                        when ((result.message as DataMessage.Success).operation) {
+                            Operation.POST -> {
+                                Toast.makeText(
+                                    requireContext(),
+                                    R.string.message_successfully_saved_post,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                            Operation.DEL -> {
+                                Toast.makeText(
+                                    requireContext(),
+                                    R.string.message_successfully_delete_post,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                            else -> {}
+                        }
+                    }
+                    is DataResource.Failure -> {
+                        val messageId = when ((result.message as DataMessage.Failure).reason) {
+                            GenericFailureReason.UNKNOWN -> {
+                                when (result.message.operation) {
+                                    Operation.POST -> R.string.error_save_post_detail
+                                    Operation.DEL -> R.string.error_delete_save_post
+                                    else -> null
+                                }
+                            }
+                            GenericFailureReason.CONNECTION -> R.string.error_network_connetion
+                        }
+
+                        messageId?.let {
+                            Snackbar.make(requireContext(), view, getString(it), Snackbar.LENGTH_LONG).apply {
+                                setAction(R.string.action_retry) {
+                                    postDetailViewModel.savePost()
+                                }
+                                show()
+                            }
                         }
                     }
                 }
@@ -86,6 +133,9 @@ class PostDetailFragment: Fragment() {
                     R.id.action_postDetailFragment_to_commentListFragment,
                     CommentListFragment.buildBundle(postId = postId)
                 )
+            }
+            savePostOffline = {
+                postDetailViewModel.savePost()
             }
         }
     }

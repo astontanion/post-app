@@ -1,5 +1,6 @@
 package space.stanton.technicaltest.repository
 
+import android.database.sqlite.SQLiteException
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -14,6 +15,7 @@ import java.nio.file.Paths
 class FakePostRepositoryImpl(): PostRepository {
 
     private var posts: List<Post> = listOf()
+    private val savedPosts: MutableList<Post> = mutableListOf()
 
     init {
         val reader = Files.newBufferedReader(Paths.get("src/main/res/raw/posts.json"))
@@ -36,5 +38,26 @@ class FakePostRepositoryImpl(): PostRepository {
         }
 
         throw HttpException(Response.error<Post?>(500, "".toResponseBody()))
+    }
+
+    override suspend fun retrieveAllSavedPosts(): List<Post> {
+        return savedPosts
+    }
+
+    override suspend fun retrieveSavedPostWithId(postId: Int): Post {
+        return savedPosts.first { it.id == postId }
+    }
+
+    override suspend fun deleteSavedPostWithId(postId: Int): Post {
+        val post = savedPosts.first { it.id == postId }
+        val wasRemoved = savedPosts.removeIf { it.id == postId }
+        if (wasRemoved) { return post }
+
+        throw SQLiteException()
+    }
+
+    override suspend fun savePost(post: Post): Post {
+        savedPosts.add(post)
+        return post
     }
 }

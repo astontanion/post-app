@@ -6,50 +6,96 @@
             type="space.stanton.technicaltest.viewmodel.PostDetailViewModel"
             />
     </data>
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:enabled="false"
-        app:refreshing="@{viewModel.state.refreshing}"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:layout_constraintStart_toStartOf="parent"
         >
-        <LinearLayout
+
+<!--        <com.google.android.material.appbar.AppBarLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+<!--            <com.google.android.material.appbar.MaterialToolbar-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:navigationIcon="?homeAsUpIndicator"-->
+<!--                />-->
+<!--        </com.google.android.material.appbar.AppBarLayout>-->
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swiperefresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <TextView
-                android:id="@+id/title"
+            android:enabled="false"
+            app:refreshing="@{viewModel.state.refreshing}"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:text="@{viewModel.state.postResource.data.title}"
-                />
+                android:layout_height="match_parent"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="16dp"
+                >
+                <TextView
+                    android:id="@+id/post_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:text="@{viewModel.state.postResource.data.title}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/button_save_post"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    />
 
-            <TextView
-                android:id="@+id/content"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
-                android:text="@{viewModel.state.postResource.data.content}"
-                />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/button_save_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_save_24"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/post_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:contentDescription="@string/button_save_post_content_description"
+                    android:onClick="@{(v) -> viewModel.savePostOffline.invoke()}"
+                    android:backgroundTint="@{viewModel.state.savedPostResource.data == null ? @color/veryDarkGrey: @color/darkPink}"
+                    android:tint="@{@color/white}"
+                    />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_see_coments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_see_comment"
-                android:contentDescription="@string/content_description_see_comment"
-                android:onClick="@{(v) -> viewModel.seeCommentClick.invoke()}"
-                />
-        </LinearLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:textSize="18sp"
+                    android:text="@{viewModel.state.postResource.data.content}"
+                    app:layout_constraintTop_toBottomOf="@id/post_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/button_see_coments"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_see_coments"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_see_comment"
+                    android:contentDescription="@string/content_description_see_comment"
+                    android:onClick="@{(v) -> viewModel.seeCommentClick.invoke()}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

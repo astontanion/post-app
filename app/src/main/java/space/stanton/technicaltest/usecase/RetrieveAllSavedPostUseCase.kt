@@ -2,42 +2,33 @@ package space.stanton.technicaltest.usecase
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
 import space.stanton.technicaltest.model.Post
 import space.stanton.technicaltest.network.DataResource
 import space.stanton.technicaltest.network.GenericFailureReason
 import space.stanton.technicaltest.network.Operation
 import space.stanton.technicaltest.repository.PostRepository
-import java.io.IOException
 import javax.inject.Inject
 
-class RetrievePostWithIdUseCase @Inject constructor(
+class RetrieveAllSavedPostUseCase @Inject constructor(
     private val postRepository: PostRepository
 ) {
 
-    suspend operator fun invoke(postId: Int): Flow<DataResource<Post>> {
-        return flow<DataResource<Post>> {
+    suspend operator fun invoke(): Flow<DataResource<List<Post>>> {
+        return flow<DataResource<List<Post>>> {
             try {
                 emit(DataResource.Waiting())
-                val post = postRepository.retrievePostWithId(postId = postId)
+                val posts = postRepository.retrieveAllSavedPosts()
                 emit(
                     DataResource.Successful(
-                        data = post,
+                        data = posts,
                         operation = Operation.GET
                     )
                 )
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
                 emit(
                     DataResource.Failure(
                         operation = Operation.GET,
                         reason = GenericFailureReason.UNKNOWN
-                    )
-                )
-            } catch (e: IOException) {
-                emit(
-                    DataResource.Failure(
-                        operation = Operation.GET,
-                        reason = GenericFailureReason.CONNECTION
                     )
                 )
             }

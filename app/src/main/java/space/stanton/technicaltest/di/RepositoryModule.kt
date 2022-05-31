@@ -4,16 +4,21 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import space.stanton.technicaltest.database.PostDao
 import space.stanton.technicaltest.network.ApiService
 import space.stanton.technicaltest.repository.*
+import javax.inject.Inject
 
 @Module
 @InstallIn(SingletonComponent::class)
 class RepositoryModule {
 
     @Provides
-    fun providePostRepository(): PostRepository {
-        return PostRepositoryImpl(ApiService<PostEndPoint>())
+    fun providePostRepository(postDao: PostDao): PostRepository {
+        return PostRepositoryImpl(
+            ApiService<PostEndPoint>(),
+            postDao
+        )
     }
 
     @Provides
