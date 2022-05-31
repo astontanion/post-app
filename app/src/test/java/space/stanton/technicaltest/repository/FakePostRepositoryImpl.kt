@@ -8,15 +8,15 @@ import retrofit2.Response
 import space.stanton.technicaltest.model.Post
 import space.stanton.technicaltest.model.PostDto
 import java.io.IOException
-import java.nio.file.Files.newBufferedReader
+import java.nio.file.Files
 import java.nio.file.Paths
 
-class FakePostRepositoryImpl: PostRepository {
+class FakePostRepositoryImpl(): PostRepository {
 
     private var posts: List<Post> = listOf()
 
     init {
-        val reader = newBufferedReader(Paths.get("src/main/res/raw/posts.json"))
+        val reader = Files.newBufferedReader(Paths.get("src/main/res/raw/posts.json"))
         val type = object: TypeToken<List<PostDto>>() {}.type
         val postsDto = Gson().fromJson<List<PostDto>>(reader, type)
         posts = postsDto.map { it.toPost() }

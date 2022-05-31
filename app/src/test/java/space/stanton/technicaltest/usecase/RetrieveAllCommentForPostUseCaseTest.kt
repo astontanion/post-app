@@ -22,7 +22,9 @@ class RetrieveAllCommentForPostUseCaseTest {
 
     @Before
     fun setup() {
-        retrieveAllCommentForPostUseCase = RetrieveAllCommentForPostUseCase(FakeCommentRepositoryImpl())
+        retrieveAllCommentForPostUseCase = RetrieveAllCommentForPostUseCase(
+            FakeCommentRepositoryImpl()
+        )
     }
 
     @Test

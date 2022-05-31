@@ -1,9 +1,10 @@
 package space.stanton.technicaltest.usecase
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Before
@@ -17,7 +18,7 @@ import space.stanton.technicaltest.repository.FakePostRepositoryImpl
 @OptIn(ExperimentalCoroutinesApi::class)
 class RetrievePostWithIdUseCaseTest {
 
-    lateinit var retrievePostWithIdUseCase: RetrievePostWithIdUseCase
+    private lateinit var retrievePostWithIdUseCase: RetrievePostWithIdUseCase
 
     @Before
     fun setup() {

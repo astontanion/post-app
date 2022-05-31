@@ -1,5 +1,6 @@
 package space.stanton.technicaltest.viewmodel
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

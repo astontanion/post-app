@@ -1,6 +1,5 @@
 package space.stanton.technicaltest.viewmodel
 
-import androidx.core.os.bundleOf
 import androidx.lifecycle.SavedStateHandle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -12,12 +11,12 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
-import org.junit.Assert.*
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import space.stanton.technicaltest.network.DataResource
 import space.stanton.technicaltest.repository.FakePostRepositoryImpl
-import space.stanton.technicaltest.usecase.RetrieveAllPostUseCase
 import space.stanton.technicaltest.usecase.RetrievePostWithIdUseCase
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -29,7 +28,9 @@ class PostDetailViewModelTest {
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
-        retrievePostWithIdUseCase = RetrievePostWithIdUseCase(FakePostRepositoryImpl())
+        retrievePostWithIdUseCase = RetrievePostWithIdUseCase(
+            FakePostRepositoryImpl()
+        )
     }
 
     @Test

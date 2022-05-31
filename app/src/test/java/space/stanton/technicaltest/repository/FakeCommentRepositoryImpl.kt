@@ -8,17 +8,16 @@ import retrofit2.Response
 import space.stanton.technicaltest.model.Comment
 import space.stanton.technicaltest.model.CommentDto
 import space.stanton.technicaltest.model.Post
-import space.stanton.technicaltest.model.PostDto
 import java.io.IOException
-import java.nio.file.Files.newBufferedReader
+import java.nio.file.Files
 import java.nio.file.Paths
 
-class FakeCommentRepositoryImpl: CommentRepository {
+class FakeCommentRepositoryImpl(): CommentRepository {
 
     private var comments: List<Comment> = listOf()
 
     init {
-        val reader = newBufferedReader(Paths.get("src/main/res/raw/post_comments.json"))
+        val reader = Files.newBufferedReader(Paths.get("src/main/res/raw/post_comments.json"))
         val type = object: TypeToken<List<CommentDto>>() {}.type
         val commentsDto = Gson().fromJson<List<CommentDto>>(reader, type)
         comments = commentsDto.map { it.toComment() }
