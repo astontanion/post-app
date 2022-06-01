@@ -23,39 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="496bde9a-f2e5-41c6-ad3d-244129737e6a" name="Default Changelist" comment="Add nasty api calls and create all posts screen">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_material_material_1_6_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_annotations_13_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_1_6_21.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_6_10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_jdk8_1_6_10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.androidTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.androidTest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.unitTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Technical_test.app.unitTest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/space/stanton/technicaltest/repository/FakePostRepositoryImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/space/stanton/technicaltest/repository/FakePostRepositoryImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/adapter/PostAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/adapter/PostAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/core/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/core/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/database/PostDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/database/PostDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/CommentListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/CommentListFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostDetailFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/RecyclerViewFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/repository/PostRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/repository/PostRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/repository/PostRepositoryImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/repository/PostRepositoryImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/usecase/RetrieveAllSavedPostUseCase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/usecase/RetrieveAllSavedPostUseCase.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/viewmodel/PostListState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/viewmodel/PostListState.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/viewmodel/PostListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/viewmodel/PostListViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/comment_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/comment_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/comment_list_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/comment_list_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_post.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/post_detail_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/post_detail_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/post_list_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/post_list_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigation.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/space/stanton/technicaltest/repository/FakePostRepositoryImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/space/stanton/technicaltest/repository/FakePostRepositoryImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/ApiCalls.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostMasterFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/fragment/PostMasterFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/viewmodel/PostMasterViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/space/stanton/technicaltest/viewmodel/PostMasterViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,6 +116,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WORKMANAGER_INSPECTOR_NOTIFICATION_DISMISSED" value="true" />
     <property name="android-custom-view/home/aston/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED" value="RecyclerView" />
     <property name="android-custom-view/home/aston/.gradle/caches/modules-2/files-2.1/androidx.swiperefreshlayout/swiperefreshlayout/1.1.0/72a6b0cee5591c000ac32d8f9686ced8675f3e49/swiperefreshlayout-1.1.0-sources.jar!/androidx/swiperefreshlayout/widget/SwipeRefreshLayout.java_SELECTED" value="SwipeRefreshLayout" />
     <property name="android-custom-view/home/aston/.gradle/caches/modules-2/files-2.1/com.google.android.material/material/1.6.1/d4d703885d24c61bc0ec39a9a705969e41d773ef/material-1.6.1-sources.jar!/com/google/android/material/appbar/AppBarLayout.java_SELECTED" value="AppBarLayout" />

@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import org.w3c.dom.Comment
+import kotlinx.coroutines.flow.collectLatest
 import space.stanton.technicaltest.R
 import space.stanton.technicaltest.adapter.PostListViewPagerAdapter
 import space.stanton.technicaltest.databinding.PostListFragmentBinding
@@ -83,7 +82,7 @@ class PostMasterFragment: Fragment() {
             tab.text = tabs[position]
         }.attach()
 
-        postMasterViewModel.lastSelectedPost.observe(viewLifecycleOwner, Observer { post ->
+        postMasterViewModel.lastSelectedPost.observe(viewLifecycleOwner) { post ->
             post?.let {
                 postMasterViewModel.onLastSelectedPostChange(null)
                 if (binding.postListDetailFragmentContainer != null) {
@@ -100,6 +99,14 @@ class PostMasterFragment: Fragment() {
                     )
                 }
             }
-        })
+        }
+
+        lifecycleScope.launchWhenCreated {
+            postMasterViewModel.badgeCount.collectLatest { count ->
+                binding.postListTablayout.getTabAt(1)?.let { tab ->
+                    tab.orCreateBadge.number = count
+                }
+            }
+        }
     }
 }
