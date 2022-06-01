@@ -1,6 +1,7 @@
 package space.stanton.technicaltest.database
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 import space.stanton.technicaltest.model.Post
 import space.stanton.technicaltest.model.PostEntity
 
@@ -17,5 +18,5 @@ interface PostDao {
     suspend fun retrievePostWithId(postId: Int): PostEntity?
 
     @Query(value = "select * from post")
-    suspend fun retrieveAllPost(): List<PostEntity>
+    fun retrieveAllPost(): Flow<List<PostEntity>>
 }

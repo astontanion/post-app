@@ -10,16 +10,16 @@ import space.stanton.technicaltest.BR
 import space.stanton.technicaltest.R
 import space.stanton.technicaltest.model.Post
 
-class PostAdapter(private val items: List<Post>, val onItemClick: (Int) -> Unit) :
+class PostAdapter(private val items: List<Post>, val onItemClick: (post: Post) -> Unit) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     class PostViewHolder(
         itemview: View,
         private val binding: ViewDataBinding?
     ) : RecyclerView.ViewHolder(itemview) {
-        fun bind(post: Post, onItemClick: (Int) -> Unit) {
+        fun bind(post: Post, onItemClick: (post: Post) -> Unit) {
             itemView.setOnClickListener {
-                onItemClick(post.id)
+                onItemClick(post)
             }
 
             binding?.apply {

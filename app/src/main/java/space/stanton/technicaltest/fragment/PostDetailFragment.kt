@@ -1,5 +1,6 @@
 package space.stanton.technicaltest.fragment
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -27,16 +31,21 @@ class PostDetailFragment: Fragment() {
     companion object {
         const val ARG_POST_ID = "post_id"
         fun buildBundle(postId: Int): Bundle {
-            return bundleOf(ARG_POST_ID to postId)
+            return bundleOf(
+                ARG_POST_ID to postId,
+            )
         }
     }
 
     private var postId: Int = 0
     private val postDetailViewModel: PostDetailViewModel by viewModels()
     private lateinit var binding: PostDetailFragmentBinding
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appBarConfiguration = AppBarConfiguration(findNavController().graph)
+
         arguments?.let {
             val args = PostDetailFragmentArgs.fromBundle(it)
             postId = args.postId
@@ -58,6 +67,11 @@ class PostDetailFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.postDetailToolbar.apply {
+            title = getString(R.string.post_detail_fragment_title)
+            setupWithNavController(findNavController(), appBarConfiguration)
+        }
 
         lifecycleScope.launchWhenCreated {
             postDetailViewModel.state.collectLatest { state ->
@@ -129,10 +143,19 @@ class PostDetailFragment: Fragment() {
 
         postDetailViewModel.apply {
             seeCommentClick = {
-                this@PostDetailFragment.findNavController().navigate(
-                    R.id.action_postDetailFragment_to_commentListFragment,
-                    CommentListFragment.buildBundle(postId = postId)
-                )
+                // TODO change this dirty check
+                try {
+                    requireParentFragment()
+                    Navigation.createNavigateOnClickListener(
+                        resId = R.id.commentListFragment,
+                        args = CommentListFragment.buildBundle(postId = postId)
+                    ).onClick(binding.buttonSeeComents)
+                } catch (e: Exception) {
+                    this@PostDetailFragment.findNavController().navigate(
+                        R.id.action_postDetailFragment_to_commentListFragment,
+                        CommentListFragment.buildBundle(postId = postId)
+                    )
+                }
             }
             savePostOffline = {
                 postDetailViewModel.savePost()

@@ -1,19 +1,29 @@
 <resources>
     <string name="app_name">Technical test</string>
-    <string name="post_item_content_description">Title %s</string>
     <string name="activity_label">All posts</string>
     <string name="error_retrieve_all_posts">Failed to retrieve posts</string>
     <string name="error_network_connetion">Something went wrong. Check internet connection.</string>
     <string name="action_retry">Retry</string>
     <string name="error_retrieve_post_detail">Failed to retrieve post detail</string>
     <string name="button_see_comment">See comments</string>
-    <string name="content_description_see_comment">See comment</string>
+    <string name="content_description_see_comment">See comments</string>
     <string name="error_retrieve_all_comment">Failed to retrieve comments</string>
     <string name="comment_owner"> By: %s</string>
-    <string name="comment_owner_content_description">Comment by %s</string>
-    <string name="button_save_post_content_description">Click to save for offline</string>
     <string name="error_save_post_detail">Failed to save this post for offline use</string>
     <string name="message_successfully_saved_post">Post saved successfully</string>
     <string name="error_delete_save_post">Failed to delete this post from offline</string>
     <string name="message_successfully_delete_post">Post deleted successfully</string>
+
+
+    <string name="content_description_post_detail">Post detail</string>
+    <string name="content_description_post_title">Post title. %s</string>
+    <string name="content_description_post_content">Post content. %s</string>
+    <string name="content_description_comment_content">Comment. %s</string>
+    <string name="content_description_comment_user_name">Comment by %s</string>
+    <string name="content_description_button_save_post">Save for offline</string>
+    <string name="post_detail_fragment_label">Post Detail</string>
+    <string name="post_list_fragment_label">All Posts</string>
+    <string name="comment_list_fragment_label">Comments</string>
+    <string name="comment_list_fragment_title">Comments</string>
+    <string name="post_detail_fragment_title">Post Detail</string>
 </resources>

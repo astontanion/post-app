@@ -13,21 +13,22 @@
         android:layout_height="match_parent"
         android:enabled="false"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        app:layout_constraintStart_toStartOf="parent"
         >
 
-<!--        <com.google.android.material.appbar.AppBarLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-<!--            <com.google.android.material.appbar.MaterialToolbar-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:navigationIcon="?homeAsUpIndicator"-->
-<!--                />-->
-<!--        </com.google.android.material.appbar.AppBarLayout>-->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/post_detail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="?homeAsUpIndicator"
+                app:title="@string/post_detail_fragment_title"
+                />
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swiperefresh"
+            android:id="@+id/comment_list_swiperefresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:enabled="false"
@@ -54,6 +55,7 @@
                     app:layout_constraintEnd_toStartOf="@id/button_save_post"
                     android:layout_marginEnd="16dp"
                     app:layout_constraintHorizontal_chainStyle="spread"
+                    android:contentDescription="@{String.format(@string/content_description_post_title, viewModel.state.postResource.data.title)}"
                     />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -64,7 +66,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toEndOf="@id/post_title"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:contentDescription="@string/button_save_post_content_description"
+                    android:contentDescription="@string/content_description_button_save_post"
                     android:onClick="@{(v) -> viewModel.savePostOffline.invoke()}"
                     android:backgroundTint="@{viewModel.state.savedPostResource.data == null ? @color/veryDarkGrey: @color/darkPink}"
                     android:tint="@{@color/white}"
@@ -81,6 +83,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/button_see_coments"
+                    android:contentDescription="@{String.format(@string/content_description_post_content, viewModel.state.postResource.data.content)}"
                     />
 
                 <com.google.android.material.button.MaterialButton

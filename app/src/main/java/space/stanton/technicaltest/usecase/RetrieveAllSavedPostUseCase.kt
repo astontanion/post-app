@@ -2,6 +2,7 @@ package space.stanton.technicaltest.usecase
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import space.stanton.technicaltest.model.Post
 import space.stanton.technicaltest.network.DataResource
 import space.stanton.technicaltest.network.GenericFailureReason
@@ -14,24 +15,11 @@ class RetrieveAllSavedPostUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(): Flow<DataResource<List<Post>>> {
-        return flow<DataResource<List<Post>>> {
-            try {
-                emit(DataResource.Waiting())
-                val posts = postRepository.retrieveAllSavedPosts()
-                emit(
-                    DataResource.Successful(
-                        data = posts,
-                        operation = Operation.GET
-                    )
-                )
-            } catch (e: Exception) {
-                emit(
-                    DataResource.Failure(
-                        operation = Operation.GET,
-                        reason = GenericFailureReason.UNKNOWN
-                    )
-                )
-            }
+        return postRepository.retrieveAllSavedPosts().map { posts ->
+            DataResource.Successful(
+                data = posts,
+                operation = Operation.GET
+            )
         }
     }
 }

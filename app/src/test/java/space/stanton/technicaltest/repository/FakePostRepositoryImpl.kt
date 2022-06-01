@@ -3,6 +3,8 @@ package space.stanton.technicaltest.repository
 import android.database.sqlite.SQLiteException
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.HttpException
 import retrofit2.Response
@@ -40,8 +42,8 @@ class FakePostRepositoryImpl(): PostRepository {
         throw HttpException(Response.error<Post?>(500, "".toResponseBody()))
     }
 
-    override suspend fun retrieveAllSavedPosts(): List<Post> {
-        return savedPosts
+    override suspend fun retrieveAllSavedPosts(): Flow<List<Post>> {
+        return flow<List<Post>> { emit(savedPosts) }
     }
 
     override suspend fun retrieveSavedPostWithId(postId: Int): Post {

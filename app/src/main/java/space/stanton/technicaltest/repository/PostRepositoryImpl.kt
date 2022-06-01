@@ -1,6 +1,8 @@
 package space.stanton.technicaltest.repository
 
 import android.database.sqlite.SQLiteException
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
 import space.stanton.technicaltest.database.PostDao
 import space.stanton.technicaltest.model.Post
 import space.stanton.technicaltest.model.PostEntity
@@ -27,8 +29,8 @@ class PostRepositoryImpl @Inject constructor(
         return postDto.toPost()
     }
 
-    override suspend fun retrieveAllSavedPosts(): List<Post> {
-        return postDao.retrieveAllPost().map { it.toPost() }
+    override suspend fun retrieveAllSavedPosts(): Flow<List<Post>> {
+        return postDao.retrieveAllPost().map { list -> list.map { it.toPost() } }
     }
 
     override suspend fun retrieveSavedPostWithId(postId: Int): Post {

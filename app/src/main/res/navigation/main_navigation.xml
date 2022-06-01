@@ -6,9 +6,8 @@
 
     <fragment
         android:id="@+id/postListFragment"
-        android:name="space.stanton.technicaltest.fragment.PostListFragment"
-        android:label="PostListFragment"
-        >
+        android:name="space.stanton.technicaltest.fragment.PostMasterFragment"
+        android:label="@string/post_list_fragment_label" >
         <action
             android:id="@+id/action_postListFragment_to_postDetailFragment"
             app:destination="@id/postDetailFragment"
@@ -17,7 +16,7 @@
     <fragment
         android:id="@+id/postDetailFragment"
         android:name="space.stanton.technicaltest.fragment.PostDetailFragment"
-        android:label="PostDetailFragment" >
+        android:label="@string/post_detail_fragment_label" >
         <argument
             android:name="post_id"
             app:argType="integer"
@@ -29,7 +28,7 @@
     <fragment
         android:id="@+id/commentListFragment"
         android:name="space.stanton.technicaltest.fragment.CommentListFragment"
-        android:label="CommentListFragment" >
+        android:label="@string/comment_list_fragment_label" >
         <argument
             android:name="post_id"
             app:argType="integer"
