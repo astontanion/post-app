@@ -7,7 +7,6 @@ import dagger.hilt.components.SingletonComponent
 import space.stanton.technicaltest.database.PostDao
 import space.stanton.technicaltest.network.ApiService
 import space.stanton.technicaltest.repository.*
-import javax.inject.Inject
 
 @Module
 @InstallIn(SingletonComponent::class)

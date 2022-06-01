@@ -2,7 +2,6 @@ package space.stanton.technicaltest.repository
 
 import kotlinx.coroutines.flow.Flow
 import space.stanton.technicaltest.model.Post
-import space.stanton.technicaltest.model.PostEntity
 
 interface PostRepository {
     suspend fun retrieveAllPosts(): List<Post>

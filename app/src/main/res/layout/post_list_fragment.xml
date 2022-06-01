@@ -5,56 +5,21 @@
             name="viewModel"
             type="space.stanton.technicaltest.viewmodel.PostListViewModel" />
     </data>
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/recycler_view_swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:enabled="false"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:refreshing="@{viewModel.state.refreshing}"
         >
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/post_list_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="?homeAsUpIndicator"
-                app:title="@string/comment_list_fragment_title"
-                app:layout_collapseMode="pin"
-                />
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/post_list_tablayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/post_list_swiperefresh"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:enabled="false"
-            app:refreshing="@{viewModel.state.refreshing}"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            app:layout_constraintStart_toStartOf="parent"
-            >
-            <androidx.constraintlayout.widget.ConstraintLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/post_list_view_pager"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

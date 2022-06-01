@@ -1,6 +1,5 @@
 package space.stanton.technicaltest.fragment
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,11 +39,9 @@ class PostDetailFragment: Fragment() {
     private var postId: Int = 0
     private val postDetailViewModel: PostDetailViewModel by viewModels()
     private lateinit var binding: PostDetailFragmentBinding
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appBarConfiguration = AppBarConfiguration(findNavController().graph)
 
         arguments?.let {
             val args = PostDetailFragmentArgs.fromBundle(it)
@@ -62,15 +59,18 @@ class PostDetailFragment: Fragment() {
             lifecycleOwner = this@PostDetailFragment
             viewModel = postDetailViewModel
         }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navController = findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
 
         binding.postDetailToolbar.apply {
+            setupWithNavController(navController, appBarConfiguration)
             title = getString(R.string.post_detail_fragment_title)
-            setupWithNavController(findNavController(), appBarConfiguration)
         }
 
         lifecycleScope.launchWhenCreated {
@@ -143,18 +143,22 @@ class PostDetailFragment: Fragment() {
 
         postDetailViewModel.apply {
             seeCommentClick = {
-                // TODO change this dirty check
-                try {
-                    requireParentFragment()
-                    Navigation.createNavigateOnClickListener(
-                        resId = R.id.commentListFragment,
-                        args = CommentListFragment.buildBundle(postId = postId)
-                    ).onClick(binding.buttonSeeComents)
-                } catch (e: Exception) {
-                    this@PostDetailFragment.findNavController().navigate(
-                        R.id.action_postDetailFragment_to_commentListFragment,
-                        CommentListFragment.buildBundle(postId = postId)
-                    )
+                // if this fragment is child to another fragment,
+                // the current desination id will differ to this
+                // fragment desination id
+                when(navController.currentDestination?.id) {
+                    R.id.postDetailFragment -> {
+                        navController.navigate(
+                            R.id.action_postDetailFragment_to_commentListFragment,
+                            CommentListFragment.buildBundle(postId = postId)
+                        )
+                    }
+                    else -> {
+                        Navigation.createNavigateOnClickListener(
+                            resId = R.id.commentListFragment,
+                            args = CommentListFragment.buildBundle(postId = postId)
+                        ).onClick(binding.buttonSeeComents)
+                    }
                 }
             }
             savePostOffline = {

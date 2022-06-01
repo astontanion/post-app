@@ -1,6 +1,5 @@
 package space.stanton.technicaltest.fragment
 
-import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
@@ -45,10 +44,8 @@ class PostDetailFragmentTest {
         val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
         val postDetailFragmentArgs = PostDetailFragmentArgs(postId = 86).toBundle()
 
-        launchFragmentInHiltContainer<PostDetailFragment>(postDetailFragmentArgs) {
-            navController.setGraph(R.navigation.main_navigation)
+        launchFragmentInHiltContainer<PostDetailFragment>(navController, postDetailFragmentArgs) {
             navController.setCurrentDestination(R.id.postDetailFragment, postDetailFragmentArgs)
-            Navigation.setViewNavController(requireView(), navController)
         }
 
         onView(withId(R.id.button_see_coments)).perform(click())
@@ -61,10 +58,8 @@ class PostDetailFragmentTest {
         val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
         val postDetailFragmentArgs = PostDetailFragmentArgs(postId = 86).toBundle()
 
-        launchFragmentInHiltContainer<PostDetailFragment>(postDetailFragmentArgs) {
-            navController.setGraph(R.navigation.main_navigation)
+        launchFragmentInHiltContainer<PostDetailFragment>(navController, postDetailFragmentArgs) {
             navController.setCurrentDestination(R.id.postDetailFragment, postDetailFragmentArgs)
-            Navigation.setViewNavController(requireView(), navController)
         }
 
         onView(withId(R.id.button_save_post)).perform(click())

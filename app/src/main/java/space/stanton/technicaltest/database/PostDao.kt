@@ -2,7 +2,6 @@ package space.stanton.technicaltest.database
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
-import space.stanton.technicaltest.model.Post
 import space.stanton.technicaltest.model.PostEntity
 
 @Dao

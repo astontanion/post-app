@@ -2,14 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/postListFragment">
+    app:startDestination="@id/postMasterFragment">
 
     <fragment
-        android:id="@+id/postListFragment"
+        android:id="@+id/postMasterFragment"
         android:name="space.stanton.technicaltest.fragment.PostMasterFragment"
         android:label="@string/post_list_fragment_label" >
         <action
-            android:id="@+id/action_postListFragment_to_postDetailFragment"
+            android:id="@+id/action_postMasterFragment_to_postDetailFragment"
             app:destination="@id/postDetailFragment"
             app:launchSingleTop="true" />
     </fragment>

@@ -12,7 +12,6 @@ import retrofit2.Response
 import space.stanton.technicaltest.R
 import space.stanton.technicaltest.model.Post
 import space.stanton.technicaltest.model.PostDto
-import space.stanton.technicaltest.model.PostEntity
 import java.io.BufferedInputStream
 import java.io.IOException
 

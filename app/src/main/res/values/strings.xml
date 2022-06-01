@@ -21,9 +21,12 @@
     <string name="content_description_comment_content">Comment. %s</string>
     <string name="content_description_comment_user_name">Comment by %s</string>
     <string name="content_description_button_save_post">Save for offline</string>
+    <string name="content_description_button_delete_post">Delete from offline</string>
     <string name="post_detail_fragment_label">Post Detail</string>
     <string name="post_list_fragment_label">All Posts</string>
     <string name="comment_list_fragment_label">Comments</string>
     <string name="comment_list_fragment_title">Comments</string>
     <string name="post_detail_fragment_title">Post Detail</string>
+    <string name="content_description_post_master_tabs">Online and offline</string>
+    <string name="content_description_offline_post_count">%d saved posts</string>
 </resources>

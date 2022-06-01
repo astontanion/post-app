@@ -1,11 +1,10 @@
 package space.stanton.technicaltest.repository
 
 import android.database.sqlite.SQLiteException
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import space.stanton.technicaltest.database.PostDao
 import space.stanton.technicaltest.model.Post
-import space.stanton.technicaltest.model.PostEntity
 import space.stanton.technicaltest.network.ApiService
 import javax.inject.Inject
 
@@ -23,6 +22,12 @@ class PostRepositoryImpl @Inject constructor(
 
     override
     suspend fun retrievePostWithId(postId: Int): Post {
+        try {
+            return retrieveSavedPostWithId(postId = postId)
+        } catch (e: Exception) {
+            // do nothing
+        }
+
         val postDto = apiService.createService(PostEndPoint::class.java)
             .retrievePostWithId(postId = postId)
 

@@ -1,9 +1,6 @@
 package space.stanton.technicaltest.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
-import dagger.hilt.android.testing.HiltAndroidRule
-import dagger.hilt.android.testing.HiltAndroidTest
-import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -17,17 +14,13 @@ import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import space.stanton.technicaltest.di.DatabaseModule
-import space.stanton.technicaltest.di.RepositoryModule
 import space.stanton.technicaltest.network.DataResource
 import space.stanton.technicaltest.repository.FakePostRepositoryImpl
 import space.stanton.technicaltest.usecase.DeleteSavedPostUseCase
 import space.stanton.technicaltest.usecase.RetrievePostWithIdUseCase
 import space.stanton.technicaltest.usecase.RetrieveSavedPostWithIdUseCase
 import space.stanton.technicaltest.usecase.SavePostUseCase
-import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class PostDetailViewModelTest {

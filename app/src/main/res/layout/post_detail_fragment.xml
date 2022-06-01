@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:enabled="false"
+        android:focusable="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         >
 
@@ -36,69 +37,78 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:layout_constraintStart_toStartOf="parent"
             >
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingTop="16dp"
                 >
-                <TextView
-                    android:id="@+id/post_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:text="@{viewModel.state.postResource.data.title}"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/button_save_post"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintHorizontal_chainStyle="spread"
-                    android:contentDescription="@{String.format(@string/content_description_post_title, viewModel.state.postResource.data.title)}"
-                    />
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="56dp"
+                    >
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="16dp"
+                        >
+                        <TextView
+                            android:id="@+id/post_title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="30sp"
+                            android:textStyle="bold"
+                            android:text="@{viewModel.state.postResource.data.title}"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/button_save_post"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintHorizontal_chainStyle="spread"
+                            android:contentDescription="@{String.format(@string/content_description_post_title, viewModel.state.postResource.data.title)}"
+                            />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/button_save_post"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_save_24"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/post_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:contentDescription="@string/content_description_button_save_post"
-                    android:onClick="@{(v) -> viewModel.savePostOffline.invoke()}"
-                    android:backgroundTint="@{viewModel.state.savedPostResource.data == null ? @color/veryDarkGrey: @color/darkPink}"
-                    android:tint="@{@color/white}"
-                    />
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/button_save_post"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_save_24"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/post_title"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:contentDescription="@{viewModel.state.savedPostResource.data == null ? @string/content_description_button_save_post: @string/content_description_button_delete_post}"
+                            android:onClick="@{(v) -> viewModel.savePostOffline.invoke()}"
+                            android:backgroundTint="@{viewModel.state.savedPostResource.data == null ? @color/veryDarkGrey: @color/darkPink}"
+                            android:tint="@{@color/white}"
+                            />
 
-                <TextView
-                    android:id="@+id/content"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="8dp"
-                    android:textSize="18sp"
-                    android:text="@{viewModel.state.postResource.data.content}"
-                    app:layout_constraintTop_toBottomOf="@id/post_title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/button_see_coments"
-                    android:contentDescription="@{String.format(@string/content_description_post_content, viewModel.state.postResource.data.content)}"
-                    />
+                        <TextView
+                            android:id="@+id/post_detail_content"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:textSize="18sp"
+                            android:text="@{viewModel.state.postResource.data.content}"
+                            app:layout_constraintTop_toBottomOf="@id/post_title"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:contentDescription="@{String.format(@string/content_description_post_content, viewModel.state.postResource.data.content)}"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </ScrollView>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_see_coments"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/button_see_comment"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:contentDescription="@string/content_description_see_comment"
                     android:onClick="@{(v) -> viewModel.seeCommentClick.invoke()}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

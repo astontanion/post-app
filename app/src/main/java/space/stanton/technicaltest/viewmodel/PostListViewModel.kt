@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import space.stanton.technicaltest.fragment.RecyclerViewFragment
+import space.stanton.technicaltest.fragment.PostListFragment
 import space.stanton.technicaltest.usecase.RetrieveAllPostUseCase
 import space.stanton.technicaltest.usecase.RetrieveAllSavedPostUseCase
 import javax.inject.Inject
@@ -24,7 +24,7 @@ class PostListViewModel @Inject constructor(
     val state: StateFlow<PostListState> = _state
 
     init {
-        val isOffline = savedStateHandle.get<Boolean>(RecyclerViewFragment.ARG_IS_OFFLINE) ?: false
+        val isOffline = savedStateHandle.get<Boolean>(PostListFragment.ARG_IS_FOR_OFFLINE) ?: false
        retrieveAllPosts(isOffline)
     }
 

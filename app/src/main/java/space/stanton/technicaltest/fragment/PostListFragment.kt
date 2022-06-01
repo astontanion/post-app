@@ -10,13 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import space.stanton.technicaltest.R
-import space.stanton.technicaltest.adapter.PostAdapter
-import space.stanton.technicaltest.databinding.RecyclerViewFragmentBinding
-import space.stanton.technicaltest.model.Post
+import space.stanton.technicaltest.adapter.PostListAdapter
+import space.stanton.technicaltest.databinding.PostListFragmentBinding
 import space.stanton.technicaltest.network.DataMessage
 import space.stanton.technicaltest.network.DataResource
 import space.stanton.technicaltest.network.GenericFailureReason
@@ -24,19 +21,19 @@ import space.stanton.technicaltest.viewmodel.PostListViewModel
 import space.stanton.technicaltest.viewmodel.PostMasterViewModel
 
 @AndroidEntryPoint
-class RecyclerViewFragment: Fragment() {
+class PostListFragment: Fragment() {
 
-    private lateinit var binding: RecyclerViewFragmentBinding
+    private lateinit var binding: PostListFragmentBinding
     private val postListViewmodel: PostListViewModel by viewModels()
     private val postMasterViewModel: PostMasterViewModel by viewModels({ requireParentFragment() })
-    private var isOffline = false
+    private var isForOffline = false
 
     companion object {
-        const val ARG_IS_OFFLINE = "is_offline"
+        const val ARG_IS_FOR_OFFLINE = "is_for_offline"
 
-        fun getInstance(isOffline: Boolean): RecyclerViewFragment {
-            return RecyclerViewFragment().apply {
-                arguments = bundleOf(ARG_IS_OFFLINE to isOffline)
+        fun getInstance(isOffline: Boolean): PostListFragment {
+            return PostListFragment().apply {
+                arguments = bundleOf(ARG_IS_FOR_OFFLINE to isOffline)
             }
         }
     }
@@ -44,7 +41,7 @@ class RecyclerViewFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { args ->
-            isOffline =  args.getBoolean(ARG_IS_OFFLINE)
+            isForOffline =  args.getBoolean(ARG_IS_FOR_OFFLINE, false)
         }
     }
 
@@ -53,9 +50,9 @@ class RecyclerViewFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = RecyclerViewFragmentBinding.inflate(inflater, container, false)
+        binding = PostListFragmentBinding.inflate(inflater, container, false)
         binding.apply {
-            lifecycleOwner = this@RecyclerViewFragment
+            lifecycleOwner = this@PostListFragment
             viewModel = postListViewmodel
         }
         return binding.root
@@ -64,6 +61,14 @@ class RecyclerViewFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val postListAdapter = PostListAdapter { post ->
+            postMasterViewModel.onLastSelectedPostChange(post)
+        }
+
+        binding.recyclerView.apply {
+            adapter = postListAdapter
+        }
+
         lifecycleScope.launchWhenCreated {
             postListViewmodel.state.collectLatest { state ->
                 when (val result = state.postResource) {
@@ -71,12 +76,7 @@ class RecyclerViewFragment: Fragment() {
                     is DataResource.Waiting -> {}
                     is DataResource.Successful -> {
                         result.data?.let { posts ->
-                            binding.recyclerView.apply {
-                                adapter = PostAdapter(
-                                    posts,
-                                    onItemClick = { post -> postMasterViewModel.onLastSelectedPostChange(post) }
-                                )
-                            }
+                            postListAdapter.submitItems(posts)
                         }
                     }
                     is DataResource.Failure -> {
@@ -98,7 +98,7 @@ class RecyclerViewFragment: Fragment() {
 
         Snackbar.make(requireContext(), view, getString(messageId), Snackbar.LENGTH_LONG).apply {
             setAction(R.string.action_retry) {
-                postListViewmodel.retrieveAllPosts(isOffline)
+                postListViewmodel.retrieveAllPosts(isForOffline)
             }
             show()
         }

@@ -61,7 +61,7 @@ class CommentListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val commentListAdapter = CommentListAdapter(listOf())
+        val commentListAdapter = CommentListAdapter()
 
         binding.commentListToolbar.setupWithNavController(
             findNavController(),
@@ -69,7 +69,6 @@ class CommentListFragment: Fragment() {
         )
 
         binding.commentListRecyclerView.apply {
-            // todo add a recyclerview item decoration
             adapter = commentListAdapter
         }
 
@@ -79,8 +78,9 @@ class CommentListFragment: Fragment() {
                     is DataResource.Idle -> {}
                     is DataResource.Waiting -> {}
                     is DataResource.Successful -> {
-                        val comments = result.data!!
-                        commentListAdapter.addComments(comments)
+                        result.data?.let { comments ->
+                            commentListAdapter.submitItems(comments)
+                        }
                     }
                     is DataResource.Failure -> {
                         val messageId = when ((result.message as DataMessage.Failure).reason) {

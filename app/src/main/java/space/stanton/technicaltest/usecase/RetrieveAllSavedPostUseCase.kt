@@ -1,11 +1,9 @@
 package space.stanton.technicaltest.usecase
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import space.stanton.technicaltest.model.Post
 import space.stanton.technicaltest.network.DataResource
-import space.stanton.technicaltest.network.GenericFailureReason
 import space.stanton.technicaltest.network.Operation
 import space.stanton.technicaltest.repository.PostRepository
 import javax.inject.Inject
